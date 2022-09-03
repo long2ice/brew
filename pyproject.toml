@@ -1,0 +1,39 @@
+[tool.poetry]
+name = "brew"
+version = "0.1.0"
+description = "Search for brew"
+authors = ["long2ice <long2ice@gmail.com>"]
+readme = "README.md"
+homepage = "https://github.com/long2ice/brew.git"
+repository = "https://github.com/long2ice/brew.git"
+documentation = "https://github.com/long2ice/brew/blob/main/README.md"
+keywords = ["search", "brew", "asyncio", "fastapi", "tortoise-orm"]
+packages = [
+    { include = "brew" }
+]
+include = ["LICENSE", "README.md", "CHANGELOG.md"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+rearq = { git = "https://github.com/long2ice/rearq.git", branch = "dev" }
+aerich = { git = "https://github.com/long2ice/aerich.git", branch = "dev" }
+tortoise-orm = { git = "https://github.com/tortoise/tortoise-orm.git", branch = "develop" }
+asyncmy = "*"
+httpx = "*"
+
+[tool.poetry.dev-dependencies]
+pytest = "*"
+pytest-asyncio = "*"
+black = "*"
+isort = "*"
+mypy = "*"
+ruff = "*"
+
+[tool.aerich]
+tortoise_orm = "brew.settings.TORTOISE_ORM"
+location = "./migrations"
+src_folder = "./."
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
