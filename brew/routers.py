@@ -9,7 +9,9 @@ router = APIRouter()
 
 
 @router.get("/search")
-async def search(keyword: str, limit: conint(gt=0, le=20), offset: NonNegativeInt):
+async def search(
+    keyword: str, limit: conint(gt=0, le=20) = 20, offset: NonNegativeInt = 0
+):
     return (
         await App.annotate(
             score=SearchCriterion(
@@ -17,6 +19,7 @@ async def search(keyword: str, limit: conint(gt=0, le=20), offset: NonNegativeIn
             )
         )
         .filter(score__gt=0)
+        .order_by("-score")
         .limit(limit)
         .offset(offset)
     )

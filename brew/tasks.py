@@ -48,10 +48,3 @@ async def get_cask():
         update_fields=["name", "desc", "homepage", "url", "version", "sha256"],
     )
     return len(apps)
-
-
-@rearq.task()
-async def get_app_icon(app_id: int):
-    app = await App.get(pk=app_id).only("url")
-    async with httpx.AsyncClient() as client:
-        res = await client.get(app.url)
